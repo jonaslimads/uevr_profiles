@@ -2,6 +2,8 @@
 
 Unpacked profile configurations and supporting source code. Importable ZIP packages, compiled plugins, runtime caches and logs are kept outside this repository.
 
+Performance experiments and measured results are tracked in [tests/performance](tests/performance/README.md). Experimental configurations are separate from confirmed profiles.
+
 ## Star Wars Galactic Racer
 
 `profiles/SWGR-Win64-Shipping/` contains the current profile snapshot tested on a Pico 4 using Virtual Desktop and OpenXR. The user confirmed satisfactory colors, menus, racing, cinematics and vehicle crash sequences with the automatic mono backend fix enabled.
