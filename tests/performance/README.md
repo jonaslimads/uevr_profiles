@@ -42,6 +42,16 @@ The SWGRServerPerf-v2 bundle includes `UEVRServerPerformance.ini` beside its bac
 
 ## Run record template
 
+For v3, check `[SWGR][trace-config] render_trace=true`, `[SWGR][stage-thread]` and `[SWGR][stage-profiler]`. Capture the same scene with `RenderTrace=0` separately to estimate diagnostic overhead. The launch INI is beside the backend, not in the roaming profile.
+
+To identify expensive functions across the whole render thread, use the WPR CPU profile in a separate short run from an administrator terminal:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File tools/performance/Collect-CPUStacks.ps1 -OutputDirectory C:\VRMeasurements -Seconds 60
+```
+
+`-CheckOnly` inspects availability and current recording state without starting a trace. The local WPR CPU profile includes SampledProfile, CSwitch and ReadyThread stacks. Analyze the saved ETL in Windows Performance Analyzer, filter by recorded PID and the hot thread, and load the matching UEVR PDB. WPR records the system, so keep raw ETL private and outside repositories. The wrapper preserves existing recordings and saves its own recording in `finally`; keep the terminal open until saving finishes. Recording and ETL analysis have not been validated in the managed session because it is not an administrator session. Do not substitute hook-boundary stacks for sampled CPU stacks.
+
 | Item | Value |
 | --- | --- |
 | Date / time zone / racing interval | |

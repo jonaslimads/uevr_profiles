@@ -4,6 +4,8 @@
 *.pdb
 *.exe
 *.log
+*.etl
+*.tmp
 **/log.txt
 **/cache/
 build/
