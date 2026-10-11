@@ -15,6 +15,7 @@ This directory tracks measurements, experimental UEVR builds, and repeatable tes
 - [October 11 baseline and investigation](reports/2026-10-11-swgr-baseline.md)
 - [Experimental run 2: hot thread and diagnostic activation failure](reports/2026-10-11-experimental-run-2.md)
 - [Diagnostic recovery and thread identification](reports/2026-10-11-diagnostic-recovery.md)
+- [v2 Potato test: hot render thread with small measured UEVR waits](reports/2026-10-11-v2-potato.md)
 
 ## Next session
 
