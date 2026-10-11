@@ -1,0 +1,10 @@
+{
+  "source": "https://github.com/praydog/FF7R-UEVR",
+  "revision": "d5815b0d9491ba2f1c2f9596fd02fbb89755ec21",
+  "archiveSha256": "AA37F0471DB91C1E4B374C100967952523E857534A16FD65CD389AA1489B2B31",
+  "pluginSha256": "6A835D4B2190638F23B1A02BBF4C019E050B1016BE8B868819979CDB27B4D8AF",
+  "runtimePlugin": "plugins/ff7remake_.dll",
+  "renderer": "D3D11",
+  "windowMode": "Windowed",
+  "headsetValidation": "pending"
+}
