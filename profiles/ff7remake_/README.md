@@ -33,3 +33,5 @@ Use the normal OpenXR controller bindings. A/B on the right and X/Y on the left 
 3. Play a previously broken cutscene; confirm both eyes show the scene and capture the fallback transition log.
 4. Return to gameplay; verify depth/stereo returns, including fades and dark areas.
 5. Test all face buttons, grips, triggers, party D-pad, lock-on and combat shortcuts. Compare the same scene before and after the clarity settings.
+
+Initial user feedback: visuals and one 3D cutscene were satisfactory, but some dialogue subtitles disagree between the eyes. This does not yet validate missing-eye fallback. See [subtitle investigation](../../tests/ff7/README.md). The separate v2 backend adds support for the observed typeless scene format and routing diagnostics; the subtitle cause remains unconfirmed.
