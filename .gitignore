@@ -1,0 +1,10 @@
+# Generated packages, binaries, runtime caches and diagnostics
+*.zip
+*.dll
+*.pdb
+*.exe
+*.log
+**/log.txt
+**/cache/
+build/
+.vs/
