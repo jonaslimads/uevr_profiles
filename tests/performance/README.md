@@ -14,6 +14,7 @@ This directory tracks measurements, experimental UEVR builds, and repeatable tes
 
 - [October 11 baseline and investigation](reports/2026-10-11-swgr-baseline.md)
 - [Experimental run 2: hot thread and diagnostic activation failure](reports/2026-10-11-experimental-run-2.md)
+- [Diagnostic recovery and thread identification](reports/2026-10-11-diagnostic-recovery.md)
 
 ## Next session
 
@@ -24,6 +25,10 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File tools/performance/Collec
 ```
 
 The collector records GPU samples, system-wide CPU counters, game-process aggregate CPU, optional per-thread counters, Windows-visible CPU topology, and a copy of the UEVR log. WMI permissions may require running it outside a managed sandbox or in an elevated terminal. It does not change game settings or install a backend. Save a separate capture for flat-screen comparison (`-Phase flat-screen`). Thread wait reasons are scheduler observations, not proof of a specific OpenXR wait.
+
+When WMI is unavailable, add `-UseProcessCounters`. This uses cumulative process/thread CPU time deltas and records `process-cpu.csv` instead of system-wide `cpu.csv`. The first sample has no CPU percentage; subsequent thread percentages are relative to one logical processor and process percentages can exceed 100. It reports the logical processor count visible to .NET without inferring physical core count. Both modes record Windows thread descriptions and separate description errors; an empty description does not establish a thread's role. Exited threads may produce explicit counter errors. Names and IDs apply only to that process session. Per-thread collection still adds overhead.
+
+The SWGRServerPerf-v2 bundle includes `UEVRServerPerformance.ini` beside its backend, enabling lightweight frame timings independently of profile persistence. Verify `[VR][timing-config] effective=true` and actual profiler summaries after injection. The original reset cause is still unresolved; configuration-load logs are intended to identify it.
 
 1. Finish shader compilation before measuring. Use the same track, camera, weather and graphics preset for each run.
 2. Record at least 60 seconds of actual racing and note its start/end times. Capture the Virtual Desktop overlay and GPU/CPU samples at the same time.

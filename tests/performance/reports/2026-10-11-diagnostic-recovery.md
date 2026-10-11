@@ -1,0 +1,11 @@
+# Diagnostic recovery and thread identification
+
+The user reports roughly 35 ms in Virtual Desktop's Game metric during the slow VR session, with Encoding, Networking and Decoding below 10 ms and sometimes around 5 ms. Synchronous Spacewarp was disabled. A 35 ms frame interval corresponds to approximately 28.6 frames/s and is consistent with the earlier probe rate. This focuses investigation on frame production and pacing, but does not separate engine CPU, GPU work or injected waits.
+
+SWGRServerPerf-v2 adds an explicit SWGR-only launch diagnostic override in `UEVRServerPerformance.ini`, read beside the backend once per process. Profile saves and resets cannot turn off that launch override. Configuration-load logs record the profile path, raw option, reset flag and effective diagnostic state. This addresses unreliable activation without claiming the cause of the original profile reset is known. The render path and automatic mono policy are unchanged.
+
+The collector now records Windows thread descriptions and provides `-UseProcessCounters` as an alternative to denied WMI access. A five-second mechanical check with the open, uninjected game succeeded. In process 18984, TID 19688 was named `RenderThread 0` and had two CPU delta samples of 93.83% and 88.94% of one logical processor. `GameThread` and `RHISubmissionThread` were also identified. This was not a controlled racing benchmark; scene, settings and game FPS were not recorded. It cannot identify TID 18068 from the previous process or prove that the VR slowdown has the same cause.
+
+The new backend compiled in Release and all seven tests passed, including missing/invalid/disabled/enabled launch policy cases and the six existing mono tests. In-game activation and profiler summaries remain unvalidated. The existing installed backend and active profile were preserved. No FPS improvement is claimed.
+
+Raw mechanical checks remain outside the repository under `uevr_cutscene_dev/performance-captures/20261011-151009-475-idle` and `20261011-151032-157-flat-screen`. Next, capture a controlled 60–120 second VR racing interval with the v2 launch override active and correlate hot-thread names/IDs with internal wait, copy, render-hook and post-present summaries. Hook wall times do not cover all engine rendering or GPU execution and can overlap.
